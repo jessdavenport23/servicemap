@@ -39,12 +39,23 @@
 <script>
   let map, polygons = [], geocoder;
 
-  async function initMap() {
-    map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: 37.1, lng: -79.7 },
-      zoom: 9,
-    });
-    geocoder = new google.maps.Geocoder();
+ async function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 37.1, lng: -79.7 },
+    zoom: 9,
+  });
+
+  geocoder = new google.maps.Geocoder();
+
+  const input = document.getElementById("addressInput");
+  const autocomplete = new google.maps.places.Autocomplete(input, {
+    types: ['geocode'],
+    componentRestrictions: { country: "us" }
+  });
+
+  // Fetch and load polygons here...
+}
+
 
     // Load polygons from your Apps Script web app
     const SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxZpYyst46ZUs64ttiU4qs6Kc5YLlcldqpBKDLvnpPmz_l8GmYYFmC1cLkRZHPsDZE-/exec"; // <-- Replace this
@@ -121,7 +132,7 @@ function checkAddress() {
 </script>
 
 <<script async
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_bC5zlx0DR0AgD9lPz9Cm_B1v-CGrjp0&libraries=geometry&callback=initMap">
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_bC5zlx0DR0AgD9lPz9Cm_B1v-CGrjp0&libraries=geometry&callback=initMap,places">
 </script>
 
 
