@@ -47,7 +47,7 @@
     geocoder = new google.maps.Geocoder();
 
     // Load polygons from your Apps Script web app
-    const SHEET_WEB_APP_URL = "YOUR_WEB_APP_URL_HERE"; // <-- Replace this
+    const SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbycGJ1r6Zckdpi70vhvjMPNEjOwVfc4X5X11wLRZ2FHBzjNK5Vx_1kf0HMlWV3ZQs1J/exec"; // <-- Replace this
     try {
       const res = await fetch(SHEET_WEB_APP_URL);
       const polygonSets = await res.json();
