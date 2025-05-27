@@ -85,7 +85,37 @@
           : "❌ Sorry, not in the current service area.";
       } else {
         document.getElementById("result").textContent = "Address not found.";
-      }
+      }let marker;
+
+function checkAddress() {
+  const address = document.getElementById("addressInput").value;
+  if (!address) return;
+
+  geocoder.geocode({ address }, function(results, status) {
+    if (status === "OK") {
+      const location = results[0].geometry.location;
+      map.setCenter(location);
+
+      // Remove old marker if exists
+      if (marker) marker.setMap(null);
+      marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        title: "Your address"
+      });
+
+      const inside = polygons.some(polygon =>
+        google.maps.geometry.poly.containsLocation(location, polygon)
+      );
+      document.getElementById("result").textContent = inside
+        ? "✅ Yes, you're in our service area!"
+        : "❌ Sorry, not in the current service area.";
+    } else {
+      document.getElementById("result").textContent = "Address not found.";
+    }
+  });
+}
+
     });
   }
 </script>
